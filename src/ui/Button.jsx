@@ -3,6 +3,7 @@ import { buttonInputStyles } from './commonStyles';
 
 const Button = styled.button`
   ${buttonInputStyles}
+  margin: 2rem;
   cursor: pointer;
   font-weight: bold;
 

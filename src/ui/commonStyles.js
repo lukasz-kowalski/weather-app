@@ -1,4 +1,4 @@
-export const buttonInputStyles = `margin: 2rem;
+export const buttonInputStyles = `
 padding: 1rem 2rem;
 border: 0.2rem solid gray;
 background: #fff;
