@@ -1,26 +1,73 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Form from './components/Form/Form';
+import Result from './components/Result/Result';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    value: '',
+    date: '',
+    city: '',
+    sunrise: '',
+    sunset: '',
+    temp: '',
+    wind: '',
+    pressure: '',
+    err: false
+  };
+
+  handleChange = (e) => {
+    const value = e.target.value;
+    this.setState(() => ({
+      value
+    }));
+  };
+
+  handleCitySubmit = async (e) => {
+    e.preventDefault();
+
+    const url = `${process.env.REACT_APP_API_URL}?q=${this.state.value}&${process.env.REACT_APP_API_KEY}&units=metric`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      const date = new Date().toLocaleString();
+      const { sunrise, sunset } = data.sys;
+      const { temp, pressure } = data.main;
+      const { speed } = data.wind;
+      if (response.ok) {
+        return this.setState(prevState => ({
+          city: prevState.value,
+          date,
+          sunrise,
+          sunset,
+          temp,
+          pressure,
+          wind: speed,
+          err: false
+        }))
+      }
+
+      throw new Error();
+    } catch (err) {
+      this.setState(() => ({
+        err: true
+      }));
+    }
+  };
+
+  render () {
+    return (
+      <div className="App">
+        <Form
+          value={this.state.value}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleCitySubmit}
+        />
+        {(this.state.city || this.state.err) && <Result {...this.state} />}
+      </div>
+    );
+  }
 }
+
 
 export default App;
