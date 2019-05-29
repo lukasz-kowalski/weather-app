@@ -10,6 +10,7 @@ const Form = ({ value, handleChange, handleSubmit }) => (
       onChange={handleChange}
       value={value} 
       placeholder="Enter the city"
+      required
     />
     <Button>Search for city</Button>
   </StyledForm>
