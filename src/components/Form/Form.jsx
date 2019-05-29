@@ -9,9 +9,9 @@ const Form = ({ value, handleChange, handleSubmit }) => (
       type="text"
       onChange={handleChange}
       value={value} 
-      placeholder="Wpisz miasto"
+      placeholder="Enter the city"
     />
-    <Button>Wyszukaj miasto</Button>
+    <Button>Search for city</Button>
   </StyledForm>
 );
 

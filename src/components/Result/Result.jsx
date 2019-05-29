@@ -6,15 +6,15 @@ const Result = ({ city, date, sunrise, sunset, temp, pressure, wind, err }) => {
   const sunsetTime = new Date(sunset * 1000).toLocaleTimeString();
   return (
   <StyledResult className="result">
-    {err ? <p>Nie mamy w bazie {city}</p> :
+    {err ? <p>There is no {city} in database</p> :
       <>
-        <p>Wyniki wyszukiwania dla miasta <span className="bold">{city}</span></p>
-        <p>Dane dla dnia i godziny: {date}</p>
-        <p>Aktualna temperatura: {temp} &#176;C</p>
-        <p>Wschód słońca dzisiaj o {sunriseTime}</p>
-        <p>Zachód słońca dzisiaj o {sunsetTime}</p>
-        <p>Aktualne ciśnienie powietrza {pressure}hPa</p>
-        <p>Aktualna siła wiatru {wind}m/s</p>
+        <p>Results for <span className="bold">{city}</span> city</p>
+        <p>Data for day and time: {date}</p>
+        <p>Temperature: {temp} &#176;C</p>
+        <p>Sunrise on {sunriseTime}</p>
+        <p>Sunset on {sunsetTime}</p>
+        <p>Air pressure {pressure}hPa</p>
+        <p>Wind speed {wind}m/s</p>
       </>
     }
     </StyledResult>
